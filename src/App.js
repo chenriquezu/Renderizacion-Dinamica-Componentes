@@ -9,6 +9,12 @@ function App() {
 
   const handleSubmit = (e)=>{
     e.preventDefault();
+    setDesplegar(true);
+    if (nombre ===""|| correo ===""){
+      setMensaje('Verificar que los datos de usuario y Correo  esten ingresados')
+      return  
+     }
+     setDesplegar(false);
     const NewArrTask = {
         id      : arrTask.length+1,
         nombre : nombre,
@@ -25,6 +31,8 @@ function App() {
   const [nombre,setNombre] = useState('');
   const [correo,setCorreo]   = useState('');
   const [buscar, setBuscar] = useState('')
+  const [mensaje,setMensaje] =useState('');
+  const [desplegar,setDesplegar]= useState(false);
  
 
   return (
@@ -32,9 +40,9 @@ function App() {
              <div className="header">
                 <h6>Buscador de Colaboradores</h6>
                 <input className='form-control' value={buscar} onChange={ (event) => setBuscar(event.target.value)}/>
-
              </div>
-       
+
+             {desplegar && <div class="alert alert-primary" role="alert">  {mensaje} </div>}       
        <form onSubmit={handleSubmit}>
             <div>
                <label htmlFor='Usuario'>Nombre del Colaborador</label>
